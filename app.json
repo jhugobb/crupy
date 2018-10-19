@@ -1,0 +1,10 @@
+{
+  "name": "Crupy - A telegram bot",
+  "description": "Telegram bot for the CRUPC",
+  "keywords": [
+    "telegram",
+    "bot",
+    "go"
+  ],
+  "repository": "http://github.com/jhugobb/crupy"
+}

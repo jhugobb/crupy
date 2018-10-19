@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	bot, err := tgbotapi.NewBotAPI("655992857:AAGp2nsYNwLvGIuNP2NBLeXCnjr-QXEksnc")
+	bot, err := tgbotapi.NewBotAPI(os.Getenv("BOT_TOKEN"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -18,7 +18,7 @@ func main() {
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
-	_, err = bot.SetWebhook(tgbotapi.NewWebhook("https://hidden-beyond-75415.herokuapp.com/" + bot.Token))
+	_, err = bot.SetWebhook(tgbotapi.NewWebhook("https://crupy-bot.herokuapp.com/" + bot.Token))
 
 	if err != nil {
 		log.Fatal(err)
