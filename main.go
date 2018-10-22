@@ -9,6 +9,11 @@ import (
 )
 
 func main() {
+
+	var dndCharacters []DnDCharacter
+
+	dndCharacters = append(dndCharacters, DnDCharacter{})
+
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("BOT_TOKEN"))
 	if err != nil {
 		log.Fatal(err)
