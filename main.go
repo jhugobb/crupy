@@ -38,7 +38,20 @@ func main() {
 	go http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 
 	for update := range updates {
-		//log.Printf("%+v\n", update)
-		log.Printf("From: %+v Text: %+v\n", update.Message.From, update.Message.Text)
+
+		if update.Message.IsCommand() {
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
+			switch update.Message.Command() {
+			case "help":
+				msg.Text = "type /sayhi or /status."
+			case "sayhi":
+				msg.Text = "Hi :)"
+			case "status":
+				msg.Text = "I'm ok."
+			default:
+				msg.Text = "I don't know that command"
+			}
+			bot.Send(msg)
+		}
 	}
 }
