@@ -1,1 +1,1 @@
-web: crupy-bot
+web: crupy
