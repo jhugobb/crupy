@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"strings"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
@@ -15,6 +16,9 @@ func processMessage(updates tgbotapi.UpdatesChannel, bot *tgbotapi.BotAPI, chars
 				msg := strings.Split(update.Message.Text, " ")
 				err := validateCreate(msg)
 				if err == nil {
+					for m := range msg {
+						log.Print(m)
+					}
 					name := processCreate(msg[1:], chars)
 					response.Text = "The adventure of " + name + " has just begun!"
 				} else {
