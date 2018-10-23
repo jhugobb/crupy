@@ -14,11 +14,12 @@ func processMessage(updates tgbotapi.UpdatesChannel, bot *tgbotapi.BotAPI, chars
 			switch update.Message.Command() {
 			case "create":
 				msg := strings.Split(update.Message.Text, " ")
+				log.Printf(msg[0])
+				for _, m := range msg {
+					log.Printf(m)
+				}
 				err := validateCreate(msg)
 				if err == nil {
-					for _, m := range msg {
-						log.Printf(m)
-					}
 					name := processCreate(msg[1:], chars)
 					response.Text = "The adventure of " + name + " has just begun!"
 				} else {
