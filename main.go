@@ -10,9 +10,7 @@ import (
 
 func main() {
 
-	var dndCharacters []DnDCharacter
-
-	dndCharacters = append(dndCharacters, DnDCharacter{})
+	characters := Characters{}
 
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("BOT_TOKEN"))
 	if err != nil {
@@ -42,21 +40,10 @@ func main() {
 	updates := bot.ListenForWebhook("/" + bot.Token)
 	go http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 
-	for update := range updates {
+	processMessage(updates, bot, characters)
+}
 
-		if update.Message.IsCommand() {
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
-			switch update.Message.Command() {
-			case "help":
-				msg.Text = "type /sayhi or /status."
-			case "sayhi":
-				msg.Text = "Hi :)"
-			case "status":
-				msg.Text = "I'm ok."
-			default:
-				msg.Text = "I don't know that command"
-			}
-			bot.Send(msg)
-		}
-	}
+func dndCharacter(name string) DnDCharacter {
+	character := DnDCharacter{name: name}
+	return character
 }
