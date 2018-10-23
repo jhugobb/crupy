@@ -15,7 +15,7 @@ func processMessage(updates tgbotapi.UpdatesChannel, bot *tgbotapi.BotAPI, chars
 				msg := strings.Split(update.Message.Text, " ")
 				err := validateCreate(msg)
 				if err == nil {
-					name := processCreate(msg, chars)
+					name := processCreate(msg[1:], chars)
 					response.Text = "The adventure of " + name + " has just begun!"
 				} else {
 					response.Text = err.Error()
