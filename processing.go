@@ -16,7 +16,7 @@ func processMessage(updates tgbotapi.UpdatesChannel, bot *tgbotapi.BotAPI, chars
 				msg := strings.Split(update.Message.Text, " ")
 				err := validateCreate(msg[1:])
 				if err == nil {
-					name := processCreate(msg[1:], chars)
+					name := processCreate(msg[1:], &chars)
 					response.Text = "The adventure of " + name + " has just begun!"
 				} else {
 					response.Text = err.Error()
@@ -25,7 +25,7 @@ func processMessage(updates tgbotapi.UpdatesChannel, bot *tgbotapi.BotAPI, chars
 				msg := strings.Split(update.Message.Text, " ")
 				err := validateShowAll(msg[1:])
 				if err == nil {
-					response.Text = processShowAll(msg[1:], chars)
+					response.Text = processShowAll(msg[1:], &chars)
 				}
 			default:
 				response.Text = "Command not supported"
@@ -35,7 +35,7 @@ func processMessage(updates tgbotapi.UpdatesChannel, bot *tgbotapi.BotAPI, chars
 	}
 }
 
-func processCreate(msg []string, chars Characters) string {
+func processCreate(msg []string, chars *Characters) string {
 	switch msg[0] {
 	case "dnd":
 		c := processDndCreate(msg[1])
@@ -49,12 +49,11 @@ func processDndCreate(name string) DnDCharacter {
 	return DnDCharacter{name: name}
 }
 
-func processShowAll(msg []string, chars Characters) string {
+func processShowAll(msg []string, chars *Characters) string {
 	s := strings.Builder{}
 	switch msg[0] {
 	case "dnd":
 		dndcs := chars.dndcs
-
 		for index, value := range dndcs {
 			s.WriteString("Character #" + strconv.Itoa(index) + ": " + value.name + " is a [race] [class]\n")
 		}
