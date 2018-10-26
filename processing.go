@@ -26,6 +26,8 @@ func processMessage(updates tgbotapi.UpdatesChannel, bot *tgbotapi.BotAPI, chars
 				err := validateShowAll(msg[1:])
 				if err == nil {
 					response.Text = processShowAll(msg[1:], &chars)
+				} else {
+					response.Text = err.Error()
 				}
 			default:
 				response.Text = "Command not supported"
