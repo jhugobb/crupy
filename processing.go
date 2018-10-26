@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strconv"
 	"strings"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
@@ -19,6 +20,12 @@ func processMessage(updates tgbotapi.UpdatesChannel, bot *tgbotapi.BotAPI, chars
 					response.Text = "The adventure of " + name + " has just begun!"
 				} else {
 					response.Text = err.Error()
+				}
+			case "showall":
+				msg := strings.Split(update.Message.Text, " ")
+				err := validateShowAll(msg[1:])
+				if err == nil {
+					response.Text = processShowAll(msg[1:], chars)
 				}
 			default:
 				response.Text = "Command not supported"
@@ -40,4 +47,19 @@ func processCreate(msg []string, chars Characters) string {
 
 func processDndCreate(name string) DnDCharacter {
 	return DnDCharacter{name: name}
+}
+
+func processShowAll(msg []string, chars Characters) string {
+	s := strings.Builder{}
+	switch msg[0] {
+	case "dnd":
+		dndcs := chars.dndcs
+
+		for index, value := range dndcs {
+			s.WriteString("Character #" + strconv.Itoa(index) + ": " + value.name + " is a [race] [class]\n")
+		}
+	default:
+		return "neverhere"
+	}
+	return s.String()
 }
