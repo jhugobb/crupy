@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"strconv"
 	"strings"
 
@@ -55,6 +56,7 @@ func processShowAll(msg []string, chars *Characters) string {
 	case "dnd":
 		dndcs := chars.dndcs
 		for index, value := range dndcs {
+			log.Print("I got in at least once")
 			s.WriteString("Character #" + strconv.Itoa(index) + ": " + value.name + " is a [race] [class]\n")
 		}
 	default:

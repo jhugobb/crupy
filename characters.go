@@ -5,6 +5,6 @@ type Characters struct {
 	// TODO: add support for more games
 }
 
-func (collection Characters) addDnd(char DnDCharacter) {
+func (collection *Characters) addDnd(char DnDCharacter) {
 	collection.dndcs = append(collection.dndcs, char)
 }
