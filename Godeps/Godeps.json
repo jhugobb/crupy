@@ -14,18 +14,8 @@
 			"Rev": "742154be9a26e849f02d296073c077e0a7c23828"
 		},
 		{
-			"ImportPath": "github.com/jinzhu/gorm/dialects/sqlite",
-			"Comment": "v1.9.1-32-g742154b",
-			"Rev": "742154be9a26e849f02d296073c077e0a7c23828"
-		},
-		{
 			"ImportPath": "github.com/jinzhu/inflection",
 			"Rev": "04140366298a54a039076d798123ffa108fff46c"
-		},
-		{
-			"ImportPath": "github.com/mattn/go-sqlite3",
-			"Comment": "v1.10.0",
-			"Rev": "c7c4067b79cc51e6dfdcef5c702e74b1e0fa7c75"
 		},
 		{
 			"ImportPath": "github.com/technoweenie/multipartstreamer",

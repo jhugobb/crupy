@@ -1,7 +1,6 @@
 package main
 
 import (
-	"strconv"
 	"strings"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
@@ -44,7 +43,7 @@ func processCreate(msg []string) string {
 	switch msg[0] {
 	case "dnd":
 		c := processDndCreate(msg[1])
-		handleDBCreate(c)
+		saveDndCharacter(c)
 		return c.name
 	}
 	return "neverhere"
@@ -55,16 +54,12 @@ func processDndCreate(name string) DnDCharacter {
 }
 
 func processShowAll(msg []string) string {
-	s := strings.Builder{}
+	var result string
 	switch msg[0] {
 	case "dnd":
-		var dndcs []DnDCharacter
-		dndcs = *handleDBFindAll(&dndcs)
-		for index, value := range dndcs {
-			s.WriteString("Character #" + strconv.Itoa(index+1) + ": " + value.name + " is a [race] [class]\n")
-		}
+		result = buildAllDnd()
 	default:
 		return "neverhere"
 	}
-	return s.String()
+	return result
 }
