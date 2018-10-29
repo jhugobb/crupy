@@ -59,7 +59,7 @@ func processShowAll(msg []string) string {
 	switch msg[0] {
 	case "dnd":
 		var dndcs []DnDCharacter
-		handleDBFindAll(&dndcs)
+		dndcs = *handleDBFindAll(&dndcs)
 		for index, value := range dndcs {
 			s.WriteString("Character #" + strconv.Itoa(index+1) + ": " + value.name + " is a [race] [class]\n")
 		}

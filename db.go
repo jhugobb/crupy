@@ -20,7 +20,7 @@ func handleDBCreate(c DnDCharacter) {
 	db.Create(&c)
 }
 
-func handleDBFindAll(dndchars *[]DnDCharacter) {
+func handleDBFindAll(dndchars *[]DnDCharacter) *[]DnDCharacter {
 
 	db, err := gorm.Open("sqlite3", os.Getenv("DB_NAME"))
 	if err != nil {
@@ -28,8 +28,7 @@ func handleDBFindAll(dndchars *[]DnDCharacter) {
 	}
 	defer db.Close()
 
-	db.AutoMigrate(&DnDCharacter{})
-
 	db.Find(dndchars)
 
+	return dndchars
 }
