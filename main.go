@@ -10,8 +10,6 @@ import (
 
 func main() {
 
-	characters := Characters{}
-
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("BOT_TOKEN"))
 	if err != nil {
 		log.Fatal(err)
@@ -40,7 +38,7 @@ func main() {
 	updates := bot.ListenForWebhook("/" + bot.Token)
 	go http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 
-	processMessage(updates, bot, characters)
+	processMessage(updates, bot)
 }
 
 func dndCharacter(name string) DnDCharacter {

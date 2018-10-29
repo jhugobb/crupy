@@ -1,5 +1,9 @@
 package main
 
+import (
+	"github.com/jinzhu/gorm"
+)
+
 const (
 	ATHLETICS = iota
 	ACROBATICS
@@ -33,6 +37,7 @@ const (
 )
 
 type DnDCharacter struct {
+	gorm.Model
 	name string
 	//todo: race and class
 	stats       [STATS]int
