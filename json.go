@@ -29,7 +29,7 @@ func buildAllDnd() string {
 			if err != nil {
 				log.Fatal(err)
 			}
-			log.Print(jsonChar)
+			log.Print(string(jsonChar))
 			var character DnDCharacter
 			err = json.Unmarshal(jsonChar, &character)
 			if err != nil {
