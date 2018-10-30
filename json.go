@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
-	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -21,8 +20,8 @@ func saveDndCharacter(c DnDCharacter) {
 
 func buildAllDnd() string {
 	b := strings.Builder{}
-	pwd, _ := os.Getwd()
-	files, _ := ioutil.ReadDir("characters/dnd/")
+	pwd := "characters/dnd/"
+	files, _ := ioutil.ReadDir(pwd)
 	for i, f := range files {
 		isJSON := filepath.Ext(pwd+f.Name()) == ".json"
 		if isJSON {
