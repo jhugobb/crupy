@@ -25,6 +25,7 @@ func buildAllDnd() string {
 	for i, f := range files {
 		isJSON := filepath.Ext(pwd+f.Name()) == ".json"
 		if isJSON {
+			log.Print(f.Name())
 			jsonChar, err := ioutil.ReadFile(pwd + f.Name())
 			if err != nil {
 				log.Fatal(err)
