@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -19,18 +21,22 @@ func saveDndCharacter(c DnDCharacter) {
 
 func buildAllDnd() string {
 	b := strings.Builder{}
+	pwd, _ := os.Getwd()
 	files, _ := ioutil.ReadDir("characters/dnd/")
 	for i, f := range files {
-		jsonChar, err := ioutil.ReadFile(f.Name())
-		if err != nil {
-			log.Fatal(err)
+		isJSON := filepath.Ext(pwd+f.Name()) == ".json"
+		if isJSON {
+			jsonChar, err := ioutil.ReadFile(pwd + f.Name())
+			if err != nil {
+				log.Fatal(err)
+			}
+			var character DnDCharacter
+			err = json.Unmarshal(jsonChar, &character)
+			if err != nil {
+				log.Fatal(err)
+			}
+			b.WriteString("Character #" + strconv.Itoa(i+1) + ": " + character.name + " is a [race] [class]\n")
 		}
-		var character DnDCharacter
-		err = json.Unmarshal(jsonChar, &character)
-		if err != nil {
-			log.Fatal(err)
-		}
-		b.WriteString("Character #" + strconv.Itoa(i+1) + ": " + character.name + " is a [race] [class]\n")
 	}
 	return b.String()
 }
