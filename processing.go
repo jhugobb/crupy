@@ -43,7 +43,7 @@ func processCreate(msg []string) string {
 	switch msg[0] {
 	case "dnd":
 		c := processDndCreate(msg[1])
-		saveDndCharacter(*c)
+		saveDndCharacter(c)
 		return c.name
 	}
 	return "neverhere"

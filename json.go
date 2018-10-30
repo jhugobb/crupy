@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func saveDndCharacter(c DnDCharacter) {
+func saveDndCharacter(c *DnDCharacter) {
 
 	marshalledJSON, _ := json.Marshal(c)
 	err := ioutil.WriteFile("characters/dnd/"+c.name+".json", marshalledJSON, 0644)
